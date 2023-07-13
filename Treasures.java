@@ -1,5 +1,13 @@
-public enum Treasures {
+public abstract class Treasures {
 
+    protected int width, height;
+    protected int rarity;
+    protected String name;
 
+    public Treasures() {
+        
+    }
+
+    protected String getName() { return name; }
 }
 
