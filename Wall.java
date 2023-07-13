@@ -16,7 +16,6 @@ public class Wall {
         
         populatePossibleTreasures();
         generateTreasures();
-
     }
     
     //Generate a new wall, with each rock having a health value between 1 and 3.
@@ -33,10 +32,9 @@ public class Wall {
     public void generateTreasures() {
         treasures = new ArrayList<Treasures>();
         for (int i = 0; i < r.nextInt(2, 5); i++) {
-            //todo: add random treasures to the list
             Class<? extends Treasures> treasure = possibleTreasures.get(r.nextInt(0, possibleTreasures.size()));
             try {
-                treasures.add(treasure.getConstructor().newInstance());
+                treasures.add(treasure.getDeclaredConstructor().newInstance());
             } catch (Exception e) {
                 e.printStackTrace();
             }

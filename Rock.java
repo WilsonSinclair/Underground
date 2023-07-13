@@ -2,6 +2,7 @@ public class Rock {
 
     // Represents how many hits are needed to reveal whats underneath.
     private int health;
+
     private boolean hasTreasure;
 
     public Rock(int health) {
@@ -9,6 +10,7 @@ public class Rock {
     }
 
     public int getHealth() { return health; }
+
     public void setHealth(int newHealth) {
         health = newHealth;
     }
