@@ -39,12 +39,16 @@ public class Wall {
                 e.printStackTrace();
             }
         }  
-
     }
 
     private void populatePossibleTreasures() {
         possibleTreasures.add(RedSphereSmall.class);
         possibleTreasures.add(RedSphereLarge.class);
+        possibleTreasures.add(BlueSmallSphere.class);
+        possibleTreasures.add(BlueSphereLarge.class);
+        possibleTreasures.add(HeartScale.class);
+        possibleTreasures.add(PrismSphereSmall.class);
+        possibleTreasures.add(PrismSphereLarge.class);
     }
 
     public Rock[][] getWall() { return wall; }
