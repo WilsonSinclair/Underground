@@ -7,5 +7,7 @@ public class Main {
         for (Treasures treasure : wall.getTreasures()) {
             System.out.println(treasure.getName());
         }
+
+        System.out.println(wall.getTreasureLayer().toString());
     }
 }

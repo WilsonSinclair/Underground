@@ -9,5 +9,8 @@ public abstract class Treasures {
     }
 
     protected String getName() { return name; }
+
+    protected int getWidth() { return width; }
+    protected int getHeight() { return height; }
 }
 
