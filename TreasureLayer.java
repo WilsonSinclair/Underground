@@ -1,6 +1,5 @@
 public class TreasureLayer {
     
-    //private HashMap<Coordinate, Boolean> treasureLayer;
     private Treasures[][] treasures;
 
     public TreasureLayer() {

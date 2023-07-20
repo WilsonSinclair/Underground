@@ -12,6 +12,7 @@ public class Wall {
 
     private ArrayList<Treasures> treasures;
     private Random r;
+
     private List<Class<? extends Treasures>> possibleTreasures = new ArrayList<Class<? extends Treasures>>();
     
     //Upon creation, creates a new randomly generated Wall.
@@ -69,6 +70,10 @@ public class Wall {
         possibleTreasures.add(HeartScale.class);
         possibleTreasures.add(PrismSphereSmall.class);
         possibleTreasures.add(PrismSphereLarge.class);
+        possibleTreasures.add(PaleSphereSmall.class);
+        possibleTreasures.add(PaleSphereLarge.class);
+        possibleTreasures.add(GreenSphereSmall.class);
+        possibleTreasures.add(GreenSphereLarge.class);
     }
 
     public Rock[][] getWall() { return wall; }

@@ -9,5 +9,6 @@ public class Main {
         }
 
         System.out.println(wall.getTreasureLayer().toString());
+        //new Window();
     }
 }
