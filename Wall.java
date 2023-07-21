@@ -36,7 +36,9 @@ public class Wall {
         }
         return wall;
     }
-
+    
+    //At the moment, each treasures has an equal chance of being generated, but in the future the Treasure's rarity
+    //should dictate how likely it is to be generated.
     private void generateTreasures() {
         treasures = new ArrayList<Treasures>();
         for (int i = 0; i < r.nextInt(2, 5); i++) {
