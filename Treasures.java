@@ -13,4 +13,3 @@ public abstract class Treasures {
     protected int getWidth() { return width; }
     protected int getHeight() { return height; }
 }
-
