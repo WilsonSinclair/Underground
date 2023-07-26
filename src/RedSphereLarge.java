@@ -1,3 +1,4 @@
+
 public class RedSphereLarge extends Treasures {
 
     public RedSphereLarge() {
