@@ -4,8 +4,8 @@ import java.util.List;
 
 public class Wall {
 
-    public static final int WALL_HEIGHT = 13;
-    public static final int WALL_WIDTH = 10;
+    public static final int WALL_HEIGHT = 10;
+    public static final int WALL_WIDTH = 13;
     
     private Rock[][] wall;
     private TreasureLayer treasureLayer;

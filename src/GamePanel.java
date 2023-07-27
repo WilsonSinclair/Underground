@@ -23,13 +23,16 @@ public class GamePanel extends JPanel implements Runnable {
 
     private Window window;
     
-    private TileManager tileManager = new TileManager(this);
+    private TileManager tileManager;
 
     public GamePanel(Window window) {
         this.window = window;
         this.setPreferredSize(new Dimension(screenWidth, screenHeight)); 
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
+
+        tileManager = new TileManager(this);
+
         startGameThread();
     }
 

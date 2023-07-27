@@ -8,6 +8,7 @@ public class TileManager {
 
     private GamePanel gp;
     private Tile[] tiles;
+    private Wall wall;
 
     public TileManager(GamePanel gp) {
         this.gp = gp;
@@ -43,9 +44,25 @@ public class TileManager {
     }
 
     public void draw(Graphics2D g2) {
-        g2.drawImage(tiles[0].image, 0, 0, gp.tileSize, gp.tileSize, null);
-        g2.drawImage(tiles[1].image, 100, 100, gp.tileSize, gp.tileSize, null);
-        g2.drawImage(tiles[2].image, 200, 200, gp.tileSize, gp.tileSize, null);
+        wall = Game.getCurrentWall();
+        
+        for (int row = 0, y = 0; row < gp.maxScreenRow; row++, y += gp.tileSize) {
+            for (int col = 0, x = 0; col < gp.maxScreenCol; col++, x += gp.tileSize) {
+                switch (wall.getWall()[row][col].getHealth()) {
+                    case 3:
+                        g2.drawImage(tiles[0].image, x, y, gp.tileSize, gp.tileSize, null);
+                        break;
+                    case 2:
+                        g2.drawImage(tiles[1].image, x, y, gp.tileSize, gp.tileSize, null);
+                        break;
+                    case 1:
+                        g2.drawImage(tiles[2].image, x, y, gp.tileSize, gp.tileSize, null);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        } 
     }
 }
 
