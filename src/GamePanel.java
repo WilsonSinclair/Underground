@@ -5,11 +5,12 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import java.awt.Color;
+import java.awt.Cursor;
 
 public class GamePanel extends JPanel implements Runnable {
    
-    public final int originalTileSize = 16;
-    public final int scale = 5;
+    public final int originalTileSize = 64;
+    public final int scale = 1;
 
     public final int tileSize = originalTileSize * scale;
     public final int maxScreenCol = 13;
@@ -25,11 +26,16 @@ public class GamePanel extends JPanel implements Runnable {
     
     private TileManager tileManager;
 
+    private CursorManager cursorManager;
+
     public GamePanel(Window window) {
         this.window = window;
         this.setPreferredSize(new Dimension(screenWidth, screenHeight)); 
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
+        
+        cursorManager = new CursorManager(this);
+        cursorManager.setCrossHairCursor();
 
         tileManager = new TileManager(this);
 
@@ -83,6 +89,9 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
 
         Graphics2D g2d = (Graphics2D)g;
+
+        //This technically only needs to be done whenever the wall is updated by being hit, which will
+        //save from having to unncesarily draw the same wall 60 times a second. 
         tileManager.draw(g2d);
 
         g2d.dispose();
