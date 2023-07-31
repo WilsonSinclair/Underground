@@ -46,8 +46,8 @@ public class TileManager {
     public void draw(Graphics2D g2) {
         wall = Game.getCurrentWall();
         
-        for (int row = 0, y = 0; row < gp.maxScreenRow; row++, y += gp.tileSize) {
-            for (int col = 0, x = 0; col < gp.maxScreenCol; col++, x += gp.tileSize) {
+        for (int row = 0, y = 64; row < Wall.WALL_HEIGHT; row++, y += gp.tileSize) {
+            for (int col = 0, x = 0; col < Wall.WALL_WIDTH; col++, x += gp.tileSize) {
                 switch (wall.getWall()[row][col].getHealth()) {
                     case 3:
                         g2.drawImage(tiles[0].image, x, y, gp.tileSize, gp.tileSize, null);

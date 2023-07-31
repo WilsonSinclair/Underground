@@ -3,7 +3,8 @@ import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.Color;
 import java.awt.Cursor;
 
@@ -13,8 +14,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int scale = 1;
 
     public final int tileSize = originalTileSize * scale;
-    public final int maxScreenCol = 13;
-    public final int maxScreenRow = 10;
+    public final int maxScreenCol = 16;
+    public final int maxScreenRow = 11;
     public final int screenWidth = tileSize * maxScreenCol;
     public final int screenHeight = tileSize * maxScreenRow;
 
@@ -28,14 +29,29 @@ public class GamePanel extends JPanel implements Runnable {
 
     private CursorManager cursorManager;
 
+    private BackGroundManager backGroundManager;
+
     public GamePanel(Window window) {
         this.window = window;
-        this.setPreferredSize(new Dimension(screenWidth, screenHeight)); 
+        this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                System.out.println("Mouse clicked at [" + e.getX() + ", " + e.getY() + "]");
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                cursorManager.setCrossHairCursor();
+            }
+        });
+
+        backGroundManager = new BackGroundManager();
+        
         cursorManager = new CursorManager(this);
-        cursorManager.setCrossHairCursor();
 
         tileManager = new TileManager(this);
 
@@ -82,13 +98,15 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-
+        cursorManager.update();
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         Graphics2D g2d = (Graphics2D)g;
+
+        backGroundManager.draw(g2d);
 
         //This technically only needs to be done whenever the wall is updated by being hit, which will
         //save from having to unncesarily draw the same wall 60 times a second. 
