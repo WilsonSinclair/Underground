@@ -41,9 +41,17 @@ public class GamePanel extends JPanel implements Runnable {
                 int wallX = e.getX();
                 int wallY = e.getY() - 64;
 
-                //if where we clicked is outside of the wall, then we dont care to try to hit the wall
+                //if we hit the wall
                 if (!(wallX >= 832 || wallY >= 640)) {
                     Game.hitWall(wallX, wallY, Game.getCurrentTool());
+                }
+                //If we clicked on the hammer tool
+                else if ((e.getX() >= 860 && e.getX() <= 860 + 128) && (e.getY() >= 200 && e.getY() <= 200 + 128)) {
+                    Game.setCurrentTool(1);
+                }
+                //If we clicked on the pickaxe tool
+                else if ((e.getX() >= 860 && e.getX() <= 860 + 128) && (e.getY() >= 400 && e.getY() <= 400 + 128)) {
+                    Game.setCurrentTool(2);
                 }
             }
 

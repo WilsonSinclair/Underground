@@ -1,10 +1,10 @@
 public class Game {
 
     private static Wall wall;
-    private static int currentTool; // 1 for hammer, 2 for pickaxe
+    private static Tools currentTool; // 1 for hammer, 2 for pickaxe
 
     public Game() {
-        currentTool = 1;
+        currentTool = Tools.Hammer;
         wall = new Wall();
         new Window();
         System.out.println(wall.toString());
@@ -14,11 +14,21 @@ public class Game {
         return wall;
     }
 
-    public static int getCurrentTool() {
+    public static Tools getCurrentTool() {
         return currentTool;
     }
 
-    public static void hitWall(int wallX, int wallY, int currentTool) {
+    public static void setCurrentTool(int tool) {
+        if (tool == 1) {
+            currentTool = Tools.Hammer;
+        }
+        else {
+            currentTool = Tools.Pickaxe;
+        }
+        System.out.println("Tool changed to " + currentTool);
+    }
+
+    public static void hitWall(int wallX, int wallY, Tools currentTool) {
         //Get col and row
         int col = wallY / GamePanel.getTileSize();
         int row = wallX / GamePanel.getTileSize();
@@ -26,11 +36,11 @@ public class Game {
 
         System.out.println("Row, Col: (" + row + ", " + col + ")");
         
-        if (currentTool == 1) {
+        if (currentTool == Tools.Hammer) {
             wall.getRocks()[col][row].setHealth(currentRockHealth - 3);
         }
         else {
-            wall.getRocks()[row][col].setHealth(currentRockHealth - 1);
+            wall.getRocks()[col][row].setHealth(currentRockHealth - 1);
         }
     }
 }
