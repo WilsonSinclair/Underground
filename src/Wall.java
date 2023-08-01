@@ -78,7 +78,7 @@ public class Wall {
         possibleTreasures.add(GreenSphereLarge.class);
     }
 
-    public Rock[][] getWall() { return wall; }
+    public Rock[][] getRocks() { return wall; }
     public List<Treasures> getTreasures() { return treasures; }
     public TreasureLayer getTreasureLayer() { return treasureLayer; }
 

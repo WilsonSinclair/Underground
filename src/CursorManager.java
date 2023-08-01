@@ -30,7 +30,4 @@ public class CursorManager {
     public void setHandCursor() {
         gp.setCursor(handCursor);
     }
-
-    public void update() {
-    }
 }

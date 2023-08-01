@@ -10,10 +10,8 @@ import java.awt.Cursor;
 
 public class GamePanel extends JPanel implements Runnable {
    
-    public final int originalTileSize = 64;
-    public final int scale = 1;
+    public static final int tileSize = 64;
 
-    public final int tileSize = originalTileSize * scale;
     public final int maxScreenCol = 16;
     public final int maxScreenRow = 11;
     public final int screenWidth = tileSize * maxScreenCol;
@@ -39,8 +37,14 @@ public class GamePanel extends JPanel implements Runnable {
         
         addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
-                System.out.println("Mouse clicked at [" + e.getX() + ", " + e.getY() + "]");
+            public void mouseClicked(MouseEvent e) {
+                int wallX = e.getX();
+                int wallY = e.getY() - 64;
+
+                //if where we clicked is outside of the wall, then we dont care to try to hit the wall
+                if (!(wallX >= 832 || wallY >= 640)) {
+                    Game.hitWall(wallX, wallY, Game.getCurrentTool());
+                }
             }
 
             @Override
@@ -98,7 +102,6 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        cursorManager.update();
     }
 
     public void paintComponent(Graphics g) {
@@ -119,4 +122,6 @@ public class GamePanel extends JPanel implements Runnable {
     public void setFPS(int targetFPS) {
         FPS = targetFPS;
     }
+
+    public static int getTileSize() { return tileSize; }
 }

@@ -48,7 +48,7 @@ public class TileManager {
         
         for (int row = 0, y = 64; row < Wall.WALL_HEIGHT; row++, y += gp.tileSize) {
             for (int col = 0, x = 0; col < Wall.WALL_WIDTH; col++, x += gp.tileSize) {
-                switch (wall.getWall()[row][col].getHealth()) {
+                switch (wall.getRocks()[row][col].getHealth()) {
                     case 3:
                         g2.drawImage(tiles[0].image, x, y, gp.tileSize, gp.tileSize, null);
                         break;
