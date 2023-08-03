@@ -44,19 +44,21 @@ public class TileManager {
     }
 
     public void draw(Graphics2D g2) {
+
         wall = Game.getCurrentWall();
+        int tileSize = GamePanel.getTileSize();
         
-        for (int row = 0, y = 64; row < Wall.WALL_HEIGHT; row++, y += gp.tileSize) {
-            for (int col = 0, x = 0; col < Wall.WALL_WIDTH; col++, x += gp.tileSize) {
+        for (int row = 0, y = 64; row < Wall.WALL_HEIGHT; row++, y += tileSize) {
+            for (int col = 0, x = 0; col < Wall.WALL_WIDTH; col++, x += tileSize) {
                 switch (wall.getRocks()[row][col].getHealth()) {
                     case 3:
-                        g2.drawImage(tiles[0].image, x, y, gp.tileSize, gp.tileSize, null);
+                        g2.drawImage(tiles[0].image, x, y, tileSize, tileSize, null);
                         break;
                     case 2:
-                        g2.drawImage(tiles[1].image, x, y, gp.tileSize, gp.tileSize, null);
+                        g2.drawImage(tiles[1].image, x, y, tileSize, tileSize, null);
                         break;
                     case 1:
-                        g2.drawImage(tiles[2].image, x, y, gp.tileSize, gp.tileSize, null);
+                        g2.drawImage(tiles[2].image, x, y, tileSize, tileSize, null);
                         break;
                     default:
                         break;

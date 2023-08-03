@@ -42,7 +42,7 @@ public class GamePanel extends JPanel implements Runnable {
                 int wallY = e.getY() - 64;
 
                 //if we hit the wall
-                if (!(wallX >= 832 || wallY >= 640)) {
+                if (!(wallX > 832 || wallY < 0)) {
                     Game.hitWall(wallX, wallY, Game.getCurrentTool());
                 }
                 //If we clicked on the hammer tool
@@ -119,8 +119,6 @@ public class GamePanel extends JPanel implements Runnable {
 
         backGroundManager.draw(g2d);
 
-        //This technically only needs to be done whenever the wall is updated by being hit, which will
-        //save from having to unncesarily draw the same wall 60 times a second. 
         tileManager.draw(g2d);
 
         g2d.dispose();

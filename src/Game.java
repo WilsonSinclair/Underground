@@ -30,17 +30,28 @@ public class Game {
 
     public static void hitWall(int wallX, int wallY, Tools currentTool) {
         //Get col and row
-        int col = wallY / GamePanel.getTileSize();
-        int row = wallX / GamePanel.getTileSize();
-        int currentRockHealth = wall.getRocks()[col][row].getHealth();
+        int row = wallY / GamePanel.getTileSize();
+        int col = wallX / GamePanel.getTileSize();
 
         System.out.println("Row, Col: (" + row + ", " + col + ")");
         
         if (currentTool == Tools.Hammer) {
-            wall.getRocks()[col][row].setHealth(currentRockHealth - 3);
+            wall.doDamage(row, col, 1);
+            if (col > 0) {
+                wall.doDamage(row, col - 1, 1);
+            }
+            if (col < Wall.WALL_WIDTH - 1) {
+                wall.doDamage(row, col + 1, 1);
+            }
+            if (row > 0) {
+                wall.doDamage(row - 1, col, 1);
+            }
+            if (row < Wall.WALL_HEIGHT - 1) {
+                wall.doDamage(row + 1, col, 1);
+            }
         }
         else {
-            wall.getRocks()[col][row].setHealth(currentRockHealth - 1);
+            wall.doDamage(row, col, 1);
         }
     }
 }

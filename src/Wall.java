@@ -63,6 +63,10 @@ public class Wall {
         } 
     }
 
+    public void doDamage(int row, int col, int damage) { 
+       wall[row][col].setHealth(wall[row][col].getHealth() - damage); 
+    }
+
 
     private void populatePossibleTreasures() {
         possibleTreasures.add(RedSphereSmall.class);
