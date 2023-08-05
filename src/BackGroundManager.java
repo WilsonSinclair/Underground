@@ -22,5 +22,4 @@ public class BackGroundManager {
         g2d.drawImage(toolHammer, 860, 200, null);
         g2d.drawImage(toolPickaxe, 860, 400, null);
     }
-    
 }

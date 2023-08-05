@@ -44,8 +44,10 @@ public class TileManager {
     }
 
     public void draw(Graphics2D g2) {
-
+        
         wall = Game.getCurrentWall();
+        if (!wall.requiresUpdate()) return;
+
         int tileSize = GamePanel.getTileSize();
         
         for (int row = 0, y = 64; row < Wall.WALL_HEIGHT; row++, y += tileSize) {
@@ -65,6 +67,7 @@ public class TileManager {
                 }
             }
         } 
+        //mark the wall as updated on the screen so we don't have to keep drawing the same wall over and over.
+        wall.setUpdatedStatus(true);
     }
 }
-

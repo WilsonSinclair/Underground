@@ -1,7 +1,7 @@
 public class Game {
 
     private static Wall wall;
-    private static Tools currentTool; // 1 for hammer, 2 for pickaxe
+    private static Tools currentTool; 
 
     public Game() {
         currentTool = Tools.Hammer;
@@ -52,6 +52,12 @@ public class Game {
         }
         else {
             wall.doDamage(row, col, 1);
+        }
+    }
+
+    public static void update() {
+        if (wall.getWallHealth() <= 0) {
+            wall.generateNewWall();
         }
     }
 }

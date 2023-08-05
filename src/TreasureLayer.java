@@ -38,10 +38,7 @@ public class TreasureLayer {
     }
 
     public boolean containsTreasure(int row, int col) {
-        if (treasures[row][col] != null) {
-            return true;
-        }
-        return false;
+        return treasures[row][col] != null;
     }
 
     public Treasures[][] getTreasures() { return treasures; }
