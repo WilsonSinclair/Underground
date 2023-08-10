@@ -32,8 +32,6 @@ public class Game {
         //Get col and row
         int row = wallY / GamePanel.getTileSize();
         int col = wallX / GamePanel.getTileSize();
-
-        System.out.println("Row, Col: (" + row + ", " + col + ")");
         
         if (currentTool == Tools.Hammer) {
             wall.doDamage(row, col, 1);
@@ -58,6 +56,7 @@ public class Game {
     public static void update() {
         if (wall.getWallHealth() <= 0) {
             wall.generateNewWall();
+            System.out.println(wall.toString());
         }
     }
 }

@@ -13,7 +13,7 @@ public class TileManager {
     public TileManager(GamePanel gp) {
         this.gp = gp;
 
-        tiles = new Tile[3];
+        tiles = new Tile[5];
 
         getTileImage();
     }
@@ -22,6 +22,8 @@ public class TileManager {
         try {
             File file;
             FileInputStream fs;
+
+            // Wall Tiles
 
             file = new File("../res/top_layer.png");
             fs = new FileInputStream(file);
@@ -37,6 +39,18 @@ public class TileManager {
             fs = new FileInputStream(file);
             tiles[2] = new Tile("Bottom Layer");
             tiles[2].image = ImageIO.read(fs);
+
+            file = new File("../res/dirt_layer_blank.png");
+            fs = new FileInputStream(file);
+            tiles[3] = new Tile("Blank Dirt Layer");
+            tiles[3].image = ImageIO.read(fs);
+            
+            // Treasures
+            
+            file = new File("../res/heart_scale.png");
+            fs = new FileInputStream(file);
+            tiles[4] = new Tile("Heart Scale");
+            tiles[4].image = ImageIO.read(fs);
 
         } catch(IOException e) {
             e.printStackTrace();
@@ -63,7 +77,9 @@ public class TileManager {
                         g2.drawImage(tiles[2].image, x, y, tileSize, tileSize, null);
                         break;
                     default:
-                        break;
+                        if (!wall.getTreasureLayer().containsTreasure(row, col)) {
+                            g2.drawImage(tiles[3].image, x, y, tileSize, tileSize, null);
+                        }
                 }
             }
         } 

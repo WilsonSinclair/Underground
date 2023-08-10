@@ -73,7 +73,6 @@ public class Wall {
     public void doDamage(int row, int col, int damage) { 
         wall[row][col].setHealth(wall[row][col].getHealth() - damage); 
         wallHealth -= damage; 
-        System.out.println("Wall Health: " + wallHealth);
 
         //the wall has been damaged and now needs to be redrawn to reflect those changes.
         requiresUpdate = true;
@@ -111,6 +110,9 @@ public class Wall {
                 sb.append(rock.getHealth() + " ");
             }
             sb.append("\n");
+        }
+        for (Treasures treasure : treasures) {
+            sb.append(treasure.getName() + "\n");
         }
         return sb.toString();
     }
