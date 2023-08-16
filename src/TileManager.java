@@ -14,7 +14,7 @@ public class TileManager {
     public TileManager(GamePanel gp) {
         this.gp = gp;
 
-        tiles = new Tile[7];
+        tiles = new Tile[9];
 
         getTileImage();
     }
@@ -62,6 +62,16 @@ public class TileManager {
             fs = new FileInputStream(file);
             tiles[6] = new Tile("Large Pale Sphere");
             tiles[6].image = ImageIO.read(fs);
+
+            file = new File("../res/small_blue_sphere.png");
+            fs = new FileInputStream(file);
+            tiles[7] = new Tile("Small Blue Sphere");
+            tiles[7].image = ImageIO.read(fs);
+
+            file = new File("../res/large_blue_sphere.png");
+            fs = new FileInputStream(file);
+            tiles[8] = new Tile("Large Blue Sphere");
+            tiles[8].image = ImageIO.read(fs);
 
         } catch(IOException e) {
             e.printStackTrace();
@@ -124,27 +134,50 @@ public class TileManager {
 
                     case "Small Pale Sphere":
                         g2d.drawImage(tiles[5].image, x, y, tileSize * treasure.getWidth(), tileSize * treasure.getHeight(), null); 
-                        drawn[row][col] = true;
-                        drawn[row + 1][col + 1] = true;
-                        drawn[row + 1][col] = true;
-                        drawn[row][col + 1] = true;
+                        drawn = markTilesAsDrawn(drawn, false, row, col); 
                         break;
                     
                     case "Large Pale Sphere":
                         g2d.drawImage(tiles[6].image, x, y, tileSize * treasure.getWidth(), tileSize * treasure.getHeight(), null); 
-                        drawn[row][col] = true;
-                        drawn[row + 1][col + 1] = true;
-                        drawn[row + 1][col] = true;
-                        drawn[row][col + 1] = true;
-                        drawn[row + 2][col + 2] = true;
-                        drawn[row + 2][col] = true;
-                        drawn[row][col + 2] = true;
-                        drawn[row + 1][col + 2] = true;
-                        drawn[col + 2][row + 1] = true;
+                        drawn = markTilesAsDrawn(drawn, true, row, col); 
+                        break;
+
+                    case "Small Blue Sphere":
+                        g2d.drawImage(tiles[7].image, x, y, tileSize * treasure.getWidth(), tileSize * treasure.getHeight(), null);
+                        drawn = markTilesAsDrawn(drawn, false, row, col); 
+                        break;
+
+                    case "Large Blue Sphere":
+                        g2d.drawImage(tiles[8].image, x, y, tileSize * treasure.getWidth(), tileSize * treasure.getHeight(), null); 
+                        drawn = markTilesAsDrawn(drawn, true, row, col); 
                         break;
                     default:
                 }
             }
+        }
+    }
+    
+    private boolean[][] markTilesAsDrawn(boolean[][] drawn, boolean treasureLarge, int row, int col) {
+        boolean[][] drawnTiles = drawn;
+
+        if (!treasureLarge) {
+            drawnTiles[row][col] = true;
+            drawnTiles[row + 1][col + 1] = true;
+            drawnTiles[row + 1][col] = true;
+            drawnTiles[row][col + 1] = true;
+            return drawnTiles;
+        }
+        else {
+            drawnTiles[row][col] = true;
+            drawnTiles[row + 1][col + 1] = true;
+            drawnTiles[row + 1][col] = true;
+            drawnTiles[row][col + 1] = true;
+            drawnTiles[row + 2][col + 2] = true;
+            drawnTiles[row + 2][col] = true;
+            drawnTiles[row][col + 2] = true;
+            drawnTiles[row + 1][col + 2] = true;
+            drawnTiles[row + 2][col + 1] = true;
+            return drawnTiles;
         }
     }
 }
