@@ -43,6 +43,8 @@ public class TreasureLayer {
 
     public Treasures[][] getTreasures() { return treasures; }
 
+    public Treasures getTreasure(int row, int col) { return treasures[row][col]; }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

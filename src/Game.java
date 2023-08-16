@@ -55,8 +55,9 @@ public class Game {
 
     public static void update() {
         if (wall.getWallHealth() <= 0) {
-            wall.generateNewWall();
+            wall = new Wall();
             System.out.println(wall.toString());
+            System.out.println(wall.getTreasureLayer().toString());
         }
     }
 }

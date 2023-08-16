@@ -19,7 +19,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     private Thread thread;
 
-    private int FPS = 60;
+    private int FPS = 30;
 
     private Window window;
     

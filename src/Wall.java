@@ -17,8 +17,6 @@ public class Wall {
 
     private List<Class<? extends Treasures>> possibleTreasures = new ArrayList<Class<? extends Treasures>>();
 
-    private boolean requiresUpdate;
-    
     //Upon creation, creates a new randomly generated Wall.
     public Wall() {
         r = new Random();
@@ -34,7 +32,6 @@ public class Wall {
     public Rock[][] generateNewWall() {
         wall = new Rock[WALL_HEIGHT][WALL_WIDTH];
         wallHealth = 50;
-        requiresUpdate = true;
 
         for (int i = 0; i < wall.length; i++) {
             for (int j = 0; j < wall[i].length; j++) {
@@ -73,9 +70,6 @@ public class Wall {
     public void doDamage(int row, int col, int damage) { 
         wall[row][col].setHealth(wall[row][col].getHealth() - damage); 
         wallHealth -= damage; 
-
-        //the wall has been damaged and now needs to be redrawn to reflect those changes.
-        requiresUpdate = true;
     }
 
 
@@ -97,9 +91,6 @@ public class Wall {
     public List<Treasures> getTreasures() { return treasures; }
     public TreasureLayer getTreasureLayer() { return treasureLayer; }
     public int getWallHealth() { return wallHealth; }
-
-    public boolean requiresUpdate() { return requiresUpdate; }
-    public void setUpdatedStatus(boolean status) { requiresUpdate = status; }
 
     @Override
     public String toString() {

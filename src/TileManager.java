@@ -3,6 +3,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.Arrays;
 
 public class TileManager {
 
@@ -13,7 +14,7 @@ public class TileManager {
     public TileManager(GamePanel gp) {
         this.gp = gp;
 
-        tiles = new Tile[5];
+        tiles = new Tile[7];
 
         getTileImage();
     }
@@ -52,6 +53,16 @@ public class TileManager {
             tiles[4] = new Tile("Heart Scale");
             tiles[4].image = ImageIO.read(fs);
 
+            file = new File("../res/small_pale_sphere.png");
+            fs = new FileInputStream(file);
+            tiles[5] = new Tile("Small Pale Sphere");
+            tiles[5].image = ImageIO.read(fs);
+            
+            file = new File("../res/large_pale_sphere.png");
+            fs = new FileInputStream(file);
+            tiles[6] = new Tile("Large Pale Sphere");
+            tiles[6].image = ImageIO.read(fs);
+
         } catch(IOException e) {
             e.printStackTrace();
         }
@@ -60,9 +71,11 @@ public class TileManager {
     public void draw(Graphics2D g2) {
         
         wall = Game.getCurrentWall();
-        if (!wall.requiresUpdate()) return;
 
         int tileSize = GamePanel.getTileSize();
+        
+        //We draw the treasures first to place them "underneath" the wall when it gets drawn after this
+        drawTreasures(g2, tileSize);
         
         for (int row = 0, y = 64; row < Wall.WALL_HEIGHT; row++, y += tileSize) {
             for (int col = 0, x = 0; col < Wall.WALL_WIDTH; col++, x += tileSize) {
@@ -83,7 +96,55 @@ public class TileManager {
                 }
             }
         } 
-        //mark the wall as updated on the screen so we don't have to keep drawing the same wall over and over.
-        wall.setUpdatedStatus(true);
+    }
+    
+    /*
+     * Draws the treasures "underneath the wall"
+     */
+    private void drawTreasures(Graphics2D g2d, int tileSize) {
+        Treasures treasure;
+        boolean[][] drawn = new boolean[Wall.WALL_HEIGHT][Wall.WALL_WIDTH];
+        for (boolean[] row : drawn) {
+            Arrays.fill(row, false);
+        }
+
+        for (int row = 0, y = 64; row < Wall.WALL_HEIGHT; row++, y += tileSize) {
+            for (int col = 0, x = 0; col < Wall.WALL_WIDTH; col++, x += tileSize) {
+                treasure = wall.getTreasureLayer().getTreasure(row, col);
+                if (treasure == null || drawn[row][col] == true) {
+                    //no treasure to draw here or a treasure is already drawn, continue the loop
+                    continue;
+                }
+
+                switch (treasure.getName()) {
+                    case "Heart Scale":
+                        g2d.drawImage(tiles[4].image, x, y, tileSize, tileSize, null);
+                        drawn[row][col] = true;
+                        break;
+
+                    case "Small Pale Sphere":
+                        g2d.drawImage(tiles[5].image, x, y, tileSize * treasure.getWidth(), tileSize * treasure.getHeight(), null); 
+                        drawn[row][col] = true;
+                        drawn[row + 1][col + 1] = true;
+                        drawn[row + 1][col] = true;
+                        drawn[row][col + 1] = true;
+                        break;
+                    
+                    case "Large Pale Sphere":
+                        g2d.drawImage(tiles[6].image, x, y, tileSize * treasure.getWidth(), tileSize * treasure.getHeight(), null); 
+                        drawn[row][col] = true;
+                        drawn[row + 1][col + 1] = true;
+                        drawn[row + 1][col] = true;
+                        drawn[row][col + 1] = true;
+                        drawn[row + 2][col + 2] = true;
+                        drawn[row + 2][col] = true;
+                        drawn[row][col + 2] = true;
+                        drawn[row + 1][col + 2] = true;
+                        drawn[col + 2][row + 1] = true;
+                        break;
+                    default:
+                }
+            }
+        }
     }
 }
