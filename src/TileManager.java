@@ -15,7 +15,7 @@ public class TileManager {
     public TileManager(GamePanel gp) {
         this.gp = gp;
 
-        tiles = new Tile[9];
+        tiles = new Tile[13];
 
         getTileImage();
     }
@@ -73,6 +73,26 @@ public class TileManager {
             fs = new FileInputStream(file);
             tiles[8] = new Tile("Large Blue Sphere");
             tiles[8].image = ImageIO.read(fs);
+
+            file = new File("../res/small_green_sphere.png");
+            fs = new FileInputStream(file);
+            tiles[9] = new Tile("Small Green Sphere");
+            tiles[9].image = ImageIO.read(fs);
+
+            file = new File("../res/large_green_sphere.png");
+            fs = new FileInputStream(file);
+            tiles[10] = new Tile("Large Green Sphere");
+            tiles[10].image = ImageIO.read(fs);
+
+            file = new File("../res/small_red_sphere.png");
+            fs = new FileInputStream(file);
+            tiles[11] = new Tile("Small Red Sphere");
+            tiles[11].image = ImageIO.read(fs);
+
+            file = new File("../res/large_red_sphere.png");
+            fs = new FileInputStream(file);
+            tiles[12] = new Tile("Large Red Sphere");
+            tiles[12].image = ImageIO.read(fs);
 
         } catch(IOException e) {
             e.printStackTrace();
@@ -150,6 +170,26 @@ public class TileManager {
 
                     case "Large Blue Sphere":
                         g2d.drawImage(tiles[8].image, x, y, tileSize * treasure.getWidth(), tileSize * treasure.getHeight(), null); 
+                        markTilesAsDrawn(true, row, col); 
+                        break;
+
+                    case "Small Green Sphere":
+                        g2d.drawImage(tiles[9].image, x, y, tileSize * treasure.getWidth(), tileSize * treasure.getHeight(), null); 
+                        markTilesAsDrawn(false, row, col); 
+                        break;
+
+                    case "Large Green Sphere":
+                        g2d.drawImage(tiles[10].image, x, y, tileSize * treasure.getWidth(), tileSize * treasure.getHeight(), null); 
+                        markTilesAsDrawn(true, row, col); 
+                        break;
+
+                    case "Small Red Sphere":
+                        g2d.drawImage(tiles[11].image, x, y, tileSize * treasure.getWidth(), tileSize * treasure.getHeight(), null); 
+                        markTilesAsDrawn(false, row, col); 
+                        break;
+                    
+                    case "Large Red Sphere":
+                        g2d.drawImage(tiles[12].image, x, y, tileSize * treasure.getWidth(), tileSize * treasure.getHeight(), null); 
                         markTilesAsDrawn(true, row, col); 
                         break;
                     default:
